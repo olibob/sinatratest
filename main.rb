@@ -4,6 +4,7 @@ require './song'
 
 configure do
 	enable :sessions
+	set :session_secret, '12345678900987654322345326576982757865241'
 	set bind: "127.0.0.1"
 end
 
@@ -26,9 +27,9 @@ not_found do
 end
 
 get '/set/:name' do
-	sessions[:name] = params[:name]
+	session[:name] = params[:name]
 end
 
-get '/get/hello/' do
-	"Hello, #{sessions[:name]}"
+get '/get/hello' do
+	"Hello, #{session[:name]}"
 end
