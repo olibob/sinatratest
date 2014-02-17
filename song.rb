@@ -27,7 +27,7 @@ module SongHelpers
 	end
 
 	def create_song
-		@song = Song.create(params[:song])
+		Song.create(params[:song])
 	end
 end
 
@@ -63,7 +63,7 @@ get '/songs/:id' do
 end
 
 post '/songs' do
-	create_song
+	song = create_song
 	redirect to("/songs/#{song.id}")
 end
 
