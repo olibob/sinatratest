@@ -1,5 +1,5 @@
 require 'sinatra'
-#require 'sinatra/reloader' if development?
+require 'sinatra/reloader' if development?
 require './song'
 
 configure :development do
@@ -20,7 +20,11 @@ end
 
 helpers do
 	def current?(path='/')
-		(request.path == path || request.path == path + '/') ? 'class="active"' : ''
+		if path == '/'
+			(request.path == path) ? 'class="active"' : ''
+		else
+			!!(request.path =~ /^#{path}/) ? 'class="active"' : ''
+		end
 	end
 
 	def set_title
