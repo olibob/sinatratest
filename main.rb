@@ -2,6 +2,10 @@ require 'sinatra'
 require 'sinatra/reloader' if development?
 require './song'
 
+configure do
+	enable :sessions
+end
+
 get '/' do
 	erb :home
 end
@@ -18,4 +22,12 @@ end
 
 not_found do
 	erb :not_found
+end
+
+get '/set/:name' do
+	sessions[:name] = params[:name]
+end
+
+get '/get/hello/' do
+	"Hello, #{sessions[:name]}"
 end
