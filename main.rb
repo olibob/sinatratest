@@ -18,6 +18,20 @@ configure do
 	set :password, "superbob"
 end
 
+helpers do
+	def current?(path='/')
+		(request.path == path || request.path == path + '/') ? 'class="active"' : ''
+	end
+
+	def set_title
+		@title ||= "SBS - Songs By Sinatra"
+	end
+end
+
+before do
+	set_title
+end
+
 get '/' do
 	erb :home
 end
