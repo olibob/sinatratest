@@ -26,6 +26,7 @@ get '/songs' do
 end
 
 get '/songs/new' do
+	halt(401, 'Not authorized!') unless session[:admin]
 	@song = Song.new
 	erb :new_song
 end
