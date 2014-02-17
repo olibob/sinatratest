@@ -32,11 +32,13 @@ get '/songs/new' do
 end
 
 get '/songs/:id/edit' do
+	halt(401, 'Not authorized!') unless session[:admin]
 	@song = Song.get(params[:id])
 	erb :edit_song
 end
 
 delete '/songs/:id' do
+	halt(401, 'Not authorized!') unless session[:admin]
 	Song.get(params[:id]).destroy
 	redirect to('/songs')
 end
