@@ -6,6 +6,8 @@ configure do
 	enable :sessions
 	set :session_secret, '12345678900987654322345326576982757865241'
 	set bind: "127.0.0.1"
+	set :username, "bob"
+	set :password, "superbob"
 end
 
 get '/' do
