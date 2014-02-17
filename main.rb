@@ -4,6 +4,7 @@ require './song'
 
 configure do
 	enable :sessions
+	set bind: "127.0.0.1"
 end
 
 get '/' do
