@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 gem "sinatra"
+gem "sinatra-flash"
 gem "dm-core"
 gem "dm-migrations"
 gem "thin"
