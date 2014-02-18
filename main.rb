@@ -2,6 +2,7 @@ require 'sinatra'
 #require 'sinatra/reloader' if development?
 require 'sinatra/flash'
 require './song'
+require './sinatra/auth'
 
 configure :development do
 	DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/development.db")
@@ -12,11 +13,7 @@ configure :production do
 end
 
 configure do
-	enable :sessions
-	set :session_secret, '12345678900987654322345326576982757865241'
 	set bind: "127.0.0.1"
-	set :username, "bob"
-	set :password, "superbob"
 end
 
 helpers do
@@ -61,22 +58,4 @@ end
 
 get '/get/hello' do
 	"Hello, #{session[:name]}"
-end
-
-get '/login' do
-	erb :login
-end
-
-post '/login' do
-	if params[:username] == settings.username && params[:password] == settings.password
-		session[:admin] = true
-		redirect to('/songs')
-	else
-		redirect to('/login')
-	end
-end
-
-get '/logout' do
-	session.clear
-	redirect to('/login')
 end

@@ -34,41 +34,45 @@ end
 helpers SongHelpers
 
 get '/songs' do
+	protected!
 	@title = "SBS - All Songs"
 	@song = find_songs
 	erb :songs
 end
 
 get '/songs/new' do
-	halt(401, 'Not authorized!') unless session[:admin]
+	protected!
 	@song = Song.new
 	erb :new_song
 end
 
 get '/songs/:id/edit' do
-	halt(401, 'Not authorized!') unless session[:admin]
+	protected!
 	@song = find_song
 	erb :edit_song
 end
 
 delete '/songs/:id' do
-	halt(401, 'Not authorized!') unless session[:admin]
+	protected!
 	flash[:success] = "Song successfully deleted." if find_song.destroy
 	redirect to('/songs')
 end
 
 get '/songs/:id' do
+	protected!
 	@song = find_song
 	erb :show_song
 end
 
 post '/songs' do
+	protected!
 	song = create_song
 	flash[:success] = "Song successfully added." if song
 	redirect to("/songs/#{song.id}")
 end
 
 put '/songs/:id' do
+	protected!
 	song = find_song
 	flash[:success] = "Song successfully updated." if song.update(params[:song])
 	redirect to("/songs/#{song.id}")
