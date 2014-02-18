@@ -53,7 +53,7 @@ end
 
 delete '/songs/:id' do
 	halt(401, 'Not authorized!') unless session[:admin]
-	find_song.destroy
+	flash[:success] = "Song successfully deleted." if find_song.destroy
 	redirect to('/songs')
 end
 
@@ -64,11 +64,12 @@ end
 
 post '/songs' do
 	song = create_song
+	flash[:success] = "Song successfully added." if song
 	redirect to("/songs/#{song.id}")
 end
 
 put '/songs/:id' do
 	song = find_song
-	song.update(params[:song])
+	flash[:success] = "Song successfully updated." if song.update(params[:song])
 	redirect to("/songs/#{song.id}")
 end
