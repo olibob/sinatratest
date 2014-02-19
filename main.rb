@@ -3,6 +3,8 @@ require 'sinatra'
 require 'sinatra/flash'
 require './song'
 require './sinatra/auth'
+require 'coffee-script'
+require 'v8'
 
 configure :development do
 	DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/development.db")
@@ -32,6 +34,10 @@ end
 
 before do
 	set_title
+end
+
+get '/js/sbs.js' do
+	coffee :sbs
 end
 
 get '/' do
