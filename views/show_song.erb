@@ -2,6 +2,12 @@
 <p>Relaese date: <%= @song.released_on.strftime("%e %B %Y") if @song.released_on %></p>
 <p>Length: <%= @song.length/60 %> minutes and <%= @song.length%60 %> seconds</p>
 <pre><%= @song.lyrics %></pre>
+<div class="like">
+		<%= erb :like %>
+		<form action="/songs/<%= @song.id %>/like" method="post">
+			<input type="submit" value="Like">
+		</form>
+</div>
 <p><a href="/songs">Back to song index</a></p>
 <p>
 	<a href="/songs/<%= @song.id %>/edit">Edit this song</a>

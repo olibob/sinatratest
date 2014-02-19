@@ -1,0 +1,16 @@
+<% if @song.likes == 0 %>
+	<p>
+		Nobody has likesd this song so far!
+	</p>
+<% end %>
+<% if @song.likes == 1
+	 @song.likes == 1 %>
+	<p>
+		This song has been likes once.
+	</p>
+<% end %>
+<% if @song.likes > 1 %>
+	<p>
+		This song has been liked <%= @song.likes %> times.
+	</p>
+<% end %>
